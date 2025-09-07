@@ -1,0 +1,36 @@
+0x0	; start
+
+	; set screen mode
+	b8 00 00	; ax = 0x0
+	cd 10		; int 0x10
+
+	; point ds:si to string
+	b8 c0 07	; ax = 0x7c0
+	8e d8		; ds = ax
+	be 00 01	; si = 0x100
+
+	; print string	
+	b7 00		; bh = 0x0
+
+	; get next char
+	ac		; al = [ds:si]
+
+	; check if end of string
+	3c 00		; cmp al - 0x0
+	74 08		; je stop
+
+	; print char
+	b4 0e		; ah = 0xe
+	cd 10		; int 0x10
+
+	; loop
+	eb f5		; jmp print string
+
+	; stop
+	eb fe		; jmp stop
+
+0x100	; string
+	"Hello, World!" 00
+
+0x1fe	; boot
+	55 aa
