@@ -1,11 +1,32 @@
 0x0	; start
 
+	; read from disk into memory
+	b2 00		; dl = 0x0 (drive number)
+	b6 00		; dh = 0x0 (head number)
+	b5 00		; ch = 0x0 (track number)
+	b1 02		; cl = 0x2 (sector number)
+	b0 07		; al = 0x7 (number of sectors)
+
+	bb 00 01	; bx = 0x100
+	8e c3		; es = bx
+	bb 00 00	; bx = 0x0
+
+	b4 02		; ah = 0x2
+	cd 13		; int 0x13
+
+	ea 00 00 00 01	; jump 0x100:0x0
+
+0x1fe	; boot
+	55 aa
+
+0x200	; entry
+
 	; set screen mode
 	b8 00 00	; ax = 0x0
 	cd 10		; int 0x10
 
 	; point ds:si to string
-	b8 c0 07	; ax = 0x7c0
+	b8 00 01	; ax = 0x100
 	8e d8		; ds = ax
 	be 00 01	; si = 0x100
 
@@ -29,8 +50,5 @@
 	; stop
 	eb fe		; jmp stop
 
-0x100	; string
+0x300	; string
 	"Hello, World!" 00
-
-0x1fe	; boot
-	55 aa
