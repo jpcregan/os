@@ -8,7 +8,7 @@ An operating system for the IBM PC written in machine code.
 
 ## Instructions
 
-    $ hex boot.hex os.img
+    $ ./build.sh
 
 ## Features
 
