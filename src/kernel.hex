@@ -1,5 +1,16 @@
 0x0	; entry
 
+	; register setup
+
+	b8 00 00	; ax = 0x0
+	b9 00 00	; cx = 0x0
+	ba 00 00	; dx = 0x0
+	bb 00 00	; bx = 0x0
+	bc 00 10	; sp = 0x1000
+	bd 00 00	; bp = 0x0
+	be 00 00	; si = 0x0
+	bf 00 00	; di = 0x0
+
 	; set screen mode
 	b8 00 00	; ax = 0x0
 	cd 10		; int 0x10
