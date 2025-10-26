@@ -11,6 +11,13 @@
 	be 00 00	; si = 0x0
 	bf 00 00	; di = 0x0
 
+	; segment registers
+
+	b8 00 00	; ax = 0x0
+	8e c0		; es = ax
+	8e c8		; cs = ax
+	8e d8		; ds = ax
+
 	; set screen mode
 	b8 00 00	; ax = 0x0
 	cd 10		; int 0x10
