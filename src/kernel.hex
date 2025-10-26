@@ -15,7 +15,7 @@
 
 	b8 00 00	; ax = 0x0
 	8e c0		; es = ax
-	8e c8		; cs = ax
+	8e c8		; ss = ax
 	8e d8		; ds = ax
 
 	; set screen mode
