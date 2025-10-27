@@ -27,21 +27,21 @@
 
 	b8 00 01	; ax = 0x100
 	8e d8		; ds = ax
-	be 00 01	; si = 0x100
+	be 80 00	; si = 0x100
 
 	; call print string
 
-	9a 10 02 00 01	; call 0x100:0x210
+	9a 10 01 00 01	; call 0x100:0x210
 
 	; stop
 
 	eb fe		; jmp -0x2
 
-0x100	; string
+0x80	; string
 
 	"Hello, World!" 00
 
-0x200	; print char
+0x100	; print char
 
 	50		; push ax
 	53		; push bx
@@ -56,7 +56,7 @@
 
 	cb		; return
 
-0x210	; print string
+0x110	; print string
 
 	50		; push ax
 	57		; push si
@@ -68,7 +68,7 @@
 	3c 00		; cmp al - 0x0
 	74 07		; je end
 
-	9a 00 02 00 01	; call print char
+	9a 00 01 00 01	; call print char
 	eb f4		; jmp loop
 
 	; end
