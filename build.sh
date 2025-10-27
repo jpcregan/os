@@ -1,15 +1,5 @@
 #!/bin/sh
 
-if [ "$1" = "clean" ]
-then
-	rm -f boot.bin
-	rm -f kernel.bin
-
-	rm -f os.img
-
-	exit 0
-fi
-
 hex src/boot.hex boot.bin 
 hex src/kernel.hex kernel.bin
 
