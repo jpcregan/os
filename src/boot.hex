@@ -22,10 +22,9 @@
 	b4 02		; ah = 0x2
 	cd 13		; int 0x13
 
-	; long jump
-	; we set cs to 0x0 for a flat memory map
+	; jump to kernel
 
-	ea 00 10 00 00	; jump 0x0:0x1000
+	ea 00 00 00 01	; jump 0x100:0x0
 
 0x1fe	; boot
 

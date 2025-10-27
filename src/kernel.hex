@@ -6,32 +6,34 @@
 	b9 00 00	; cx = 0x0
 	ba 00 00	; dx = 0x0
 	bb 00 00	; bx = 0x0
-	bc 00 10	; sp = 0x1000
 	bd 00 00	; bp = 0x0
 	be 00 00	; si = 0x0
 	bf 00 00	; di = 0x0
 
-	; segment registers
+	; segment register setup
 
 	b8 00 00	; ax = 0x0
 	8e c0		; es = ax
-	8e c8		; ss = ax
 	8e d8		; ds = ax
+
+	; stack setup
+
+	b8 50 00	; ax = 0x80
+	8e c8		; ss = ax
+	bc 00 0b	; sp = 0x800
 
 	; set screen mode
 
 	b8 00 00	; ax = 0x0
 	cd 10		; int 0x10
 
-	; point ds:si to string
+	; print string
 
 	b8 00 01	; ax = 0x100
 	8e d8		; ds = ax
-	be 80 00	; si = 0x100
+	be 80 00	; si = 0x80
 
-	; call print string
-
-	9a 10 01 00 01	; call 0x100:0x210
+	9a 10 01 00 01	; call print string
 
 	; stop
 
