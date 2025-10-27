@@ -20,7 +20,7 @@
 
 	b8 50 00	; ax = 0x50
 	8e c8		; ss = ax
-	bc 00 0b	; sp = 0x800
+	bc 00 0b	; sp = 0xb00
 
 	; set screen mode
 
