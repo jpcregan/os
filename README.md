@@ -10,7 +10,7 @@ An operating system for the IBM PC written in machine code.
 
     $ ./build.sh
 
-Run `os.img` in any IBM Compatible PC or emulator. [86Box](https://86box.net/) is recommended.
+Run `os.img` on an IBM Compatible PC or emulator. [86Box](https://86box.net/) is recommended.
 
 ### NOTE:
 
