@@ -1,0 +1,5 @@
+0x0	; start
+
+	eb fe
+
+0x1000	; end

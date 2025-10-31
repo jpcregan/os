@@ -42,11 +42,14 @@
 
 	; stop
 
+	b0 02		; al = 0x2
+	9a 00 02 00 01	; call load program
+
 	eb fe		; jmp -0x2
 
 0x80	; string
 
-	"Hello, World!" 00
+	"Hello, World!" 0d 0a 00
 
 0x100	; print char
 
@@ -84,5 +87,29 @@
 	58		; pop ax
 
 	cb		; return
+
+0x200	; load program
+
+	; track number in al
+	; this function never returns to caller, so we can ignore saving registers
+
+	b2 00		; dl = 0x0 (drive number)
+	b6 00		; dh = 0x0 (head number)
+	b5 01		; ch = al (track number)
+	b1 01		; cl = 0x1 (sector number)
+	b0 08		; al = 0x8 (number of sectors)
+
+	bb 00 02	; bx = 0x200
+	8e c3		; es = bx
+	bb 00 00	; bx = 0x0
+
+	b4 02		; ah = 0x2
+	cd 13		; int 0x13
+
+	9a 00 00 00 02	; call program
+
+	; reset system
+
+	ea 00 00 00 01	; jump 0x100:0x0
 
 0xd00	; end
