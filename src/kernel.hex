@@ -86,6 +86,13 @@
 
 	cb		; return
 
+0x130	; get char
+
+	b4 00		; ah = 0x0
+	cd 16		; int 0x16
+
+	cb		; return
+
 0x200	; load program
 
 	; track number in al
