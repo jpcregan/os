@@ -22,7 +22,7 @@ The image is built for a 5.25" 180KB floppy disk. Trying to run this on a PC tha
 
 ### TODO:
 
-- Add kernel interrupt support
+- Implement basic shell
 
 ## License
 
