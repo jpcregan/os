@@ -93,7 +93,7 @@
 
 	b2 00		; dl = 0x0 (drive number)
 	b6 00		; dh = 0x0 (head number)
-	88 e8		; ch = al (track number)
+	88 c5		; ch = al (track number)
 	b1 01		; cl = 0x1 (sector number)
 	b0 08		; al = 0x8 (number of sectors)
 
