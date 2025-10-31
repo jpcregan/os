@@ -40,12 +40,10 @@
 
 	9a 10 01 00 01	; call print string
 
-	; stop
+	; load shell
 
-	b0 02		; al = 0x2
+	b0 01		; al = 0x1
 	9a 00 02 00 01	; call load program
-
-	eb fe		; jmp -0x2
 
 0x80	; string
 
@@ -95,7 +93,7 @@
 
 	b2 00		; dl = 0x0 (drive number)
 	b6 00		; dh = 0x0 (head number)
-	b5 01		; ch = al (track number)
+	88 e8		; ch = al (track number)
 	b1 01		; cl = 0x1 (sector number)
 	b0 08		; al = 0x8 (number of sectors)
 
