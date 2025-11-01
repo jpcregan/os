@@ -20,7 +20,7 @@
 
 	; NOTE: A bug exists preventing SS from being set to 0x0 and SP to 0x1000 even though the effective address is the same.
 	; This seems related to the SS interrupt issue found on early 8088 revisions, but using the disable interrupt flag as a workaround has no effect.
-	; Changing to the 1982 revision in the 86Box emulator solves the issue, but for compatibility reasons SS is left at 0x80.
+	; Changing to the 1982 revision in the 86Box emulator solves the issue, but for compatibility reasons SS is set at 0xc0.
 	; I will dump both BIOS revisions later to fully understand the issue.
 
 	b8 c0 00	; ax = 0xc0
