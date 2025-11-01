@@ -1,5 +1,16 @@
 0x0	; entry
 
+	; stack setup
+
+	; NOTE: A bug exists preventing SS from being set to 0x0 and SP to 0x1000 even though the effective address is the same.
+	; This seems related to the SS interrupt issue found on early 8088 revisions, but using the disable interrupt flag as a workaround has no effect.
+	; Changing to the 1982 revision in the 86Box emulator solves the issue, but for compatibility reasons SS is set at 0xc0.
+	; I will dump both BIOS revisions later to fully understand the issue.
+
+	b8 c0 00	; ax = 0xc0
+	8e c8		; ss = ax
+	bc 00 04	; sp = 0x400
+
 	; register setup
 
 	b8 00 00	; ax = 0x0
@@ -14,23 +25,23 @@
 
 	b8 00 00	; ax = 0x0
 	8e c0		; es = ax
+
+	b8 00 01	; ax = 0x100
 	8e d8		; ds = ax
 
-	; stack setup
+	; print message
 
-	; NOTE: A bug exists preventing SS from being set to 0x0 and SP to 0x1000 even though the effective address is the same.
-	; This seems related to the SS interrupt issue found on early 8088 revisions, but using the disable interrupt flag as a workaround has no effect.
-	; Changing to the 1982 revision in the 86Box emulator solves the issue, but for compatibility reasons SS is set at 0xc0.
-	; I will dump both BIOS revisions later to fully understand the issue.
-
-	b8 c0 00	; ax = 0xc0
-	8e c8		; ss = ax
-	bc 00 04	; sp = 0x400
+	be 80 00	; si = 0x80
+	9a 10 01 00 01	; call print string
 
 	; load shell
 
 	b0 01		; al = 0x1
 	9a 00 02 00 01	; call load program
+
+0x80	; message
+
+	"os" 0d 0a
 
 0x100	; print char
 
@@ -93,6 +104,11 @@
 
 	b4 02		; ah = 0x2
 	cd 13		; int 0x13
+
+	; setup data segment
+
+	b8 00 02	; ax = 0x200
+	8e d8		; ds = ax
 
 	9a 00 00 00 02	; call program
 

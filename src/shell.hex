@@ -1,18 +1,24 @@
 0x0	; start
 
-	b8 00 02	; ax = 0x200
-	8e d8		; ds = ax
-	be 00 01	; si = 0x100
+	9a 00 01 00 02	; call get command
 
+	eb fe		; jmp -0x2
+
+0x100	; get command
+
+	9a 00 02 00 02	; call print prompt
+
+	cb		; return
+
+0x200	; print prompt
+
+	be 10 02	; si = 0x210
 	9a 10 01 00 01	; call print string
 
-	9a 30 01 00 01	; call get char
-	9a 00 01 00 01	; call print char
+	cb		; return
 
-	eb f4		; jmp -0xc
+0x210	; prompt
 
-0x100	; shell message
-
-	"Welcome to os." 0d 0a 00
+	"command: " 00
 
 0x1000	; end
