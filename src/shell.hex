@@ -8,7 +8,7 @@
 
 	9a 30 01 00 01	; call get char
 	9a 00 01 00 01	; call print char
-	
+
 	eb f4		; jmp -0xc
 
 0x100	; shell message
