@@ -23,9 +23,9 @@
 	; Changing to the 1982 revision in the 86Box emulator solves the issue, but for compatibility reasons SS is left at 0x80.
 	; I will dump both BIOS revisions later to fully understand the issue.
 
-	b8 80 00	; ax = 0x80
+	b8 c0 00	; ax = 0xc0
 	8e c8		; ss = ax
-	bc 00 08	; sp = 0x800
+	bc 00 04	; sp = 0x400
 
 	; load shell
 
