@@ -32,22 +32,10 @@
 	b8 00 00	; ax = 0x0
 	cd 10		; int 0x10
 
-	; print string
-
-	b8 00 01	; ax = 0x100
-	8e d8		; ds = ax
-	be 80 00	; si = 0x80
-
-	9a 10 01 00 01	; call print string
-
 	; load shell
 
 	b0 01		; al = 0x1
 	9a 00 02 00 01	; call load program
-
-0x80	; string
-
-	"Hello, World!" 0d 0a 00
 
 0x100	; print char
 

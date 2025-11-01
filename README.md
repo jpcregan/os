@@ -18,7 +18,8 @@ The image is built for a 5.25" 160KB floppy disk. Trying to run this on a PC tha
 
 ## Features
 
-- Prints "Hello, World!"
+- Loads kernel from disk
+- Basic input and output routines
 
 ### TODO:
 
