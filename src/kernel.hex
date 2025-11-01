@@ -27,11 +27,6 @@
 	8e c8		; ss = ax
 	bc 00 08	; sp = 0x800
 
-	; set screen mode
-
-	b8 00 00	; ax = 0x0
-	cd 10		; int 0x10
-
 	; load shell
 
 	b0 01		; al = 0x1

@@ -1,5 +1,10 @@
 0x0	; start
 
+	; set screen mode
+
+	b8 00 00	; ax = 0x0
+	cd 10		; int 0x10
+
 	; bios loads first sector into 0x7c00 by default
 	; this sets variables to load the next 7 sectors from the track
 	; sector number is one indexed, all others are zero indexed
