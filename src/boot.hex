@@ -1,9 +1,6 @@
 0x0	; start
 
-	; set screen mode
-
-	b8 00 00	; ax = 0x0
-	cd 10		; int 0x10
+	57 56 55 54 53 52 51 50	; push all registers
 
 	; bios loads first sector into 0x7c00 by default
 	; this sets variables to load the next 7 sectors from the track
@@ -26,6 +23,14 @@
 
 	b4 02		; ah = 0x2
 	cd 13		; int 0x13
+
+	; set screen mode
+
+	b8 00 00	; ax = 0x0
+	cd 10		; int 0x10
+	
+	58 59 5a 5b 5c 5d 5e 5f	; pop all registers
+	9a 00 04 00 01	; call print registers
 
 	; jump to kernel
 

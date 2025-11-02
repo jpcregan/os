@@ -32,12 +32,12 @@
 	; print message
 
 	be 80 00	; si = 0x80
-	9a 10 01 00 01	; call print string
+	9a 20 01 00 01	; call print string
 
 	; load shell
 
 	b0 01		; al = 0x1
-	9a 00 02 00 01	; call load program
+	9a 00 03 00 01	; call load program
 
 0x80	; message
 
@@ -58,7 +58,7 @@
 
 	cb		; return
 
-0x110	; print string
+0x120	; print string
 
 	50		; push ax
 	57		; push si
@@ -80,14 +80,67 @@
 
 	cb		; return
 
-0x130	; get char
+0x140	; print hex 4
+
+	50		; push ax
+
+	24 0f		; and al 0xf
+
+	3c 0a		; cmp al - 0xa
+	7c 02		; jl 0x2
+
+	04 27		; al += 0x11
+
+	04 30		; al += 0x30
+	9a 00 01 00 01	; call print char
+
+	58		; pop ax
+
+	cb		; return
+
+0x160	; print hex 8
+
+	50		; push ax
+	51		; push cx
+
+	b1 04		; cl = 0x4
+	d2 e8		; shl al
+	9a 40 01 00 01	; call print hex 4
+
+	59		; pop cx
+	58		; pop ax
+
+	9a 40 01 00 01	; call print hex 4
+
+	cb		; return
+
+0x180	; print hex 16
+
+	50		; push ax
+	51		; push cx
+
+	b1 08		; cl = 0x8
+	d3 e8		; shl ax
+	9a 60 01 00 01	; call print hex 8
+
+	59		; pop cx
+	58		; pop ax
+
+	9a 60 01 00 01	; call print hex 8
+
+	b0 00		; al = 0x0
+	9a 00 01 00 01	; call print char
+
+	cb		; return
+
+0x200	; get char
 
 	b4 00		; ah = 0x0
 	cd 16		; int 0x16
 
 	cb		; return
 
-0x200	; load program
+0x300	; load program
 
 	; track number in al
 	; this function never returns to caller, so we can ignore saving registers
@@ -115,5 +168,67 @@
 	; reset system
 
 	ea 00 00 00 01	; jump 0x100:0x0
+
+0x400	; print registers
+
+	57 56 55 54 53 52 51 50	; push all registers
+
+	1e		; push ds
+
+	50		; push ax
+	b8 00 01	; ax = 0x100
+	8e d8		; ds = ax
+	58		; pop ax
+
+	be 80 04	; si = 0x480
+	9a 20 01 00 01	; call print string
+
+	1f		; pop ds
+
+	58
+	9a 80 01 00 01	; call print hex 16
+
+	58
+	9a 80 01 00 01	; call print hex 16
+
+	58
+	9a 80 01 00 01	; call print hex 16
+
+	58
+	9a 80 01 00 01	; call print hex 16
+
+	; newline
+
+	b0 0d		; al = 0xd
+	9a 00 01 00 01	; call print char
+	b0 0a		; al = 0xa
+	9a 00 01 00 01	; call print char
+
+	58
+	9a 80 01 00 01	; call print hex 16
+
+	58
+	9a 80 01 00 01	; call print hex 16
+
+	58
+	9a 80 01 00 01	; call print hex 16
+
+	58
+	9a 80 01 00 01	; call print hex 16
+
+	; newline
+
+	b0 0d		; al = 0xd
+	9a 00 01 00 01	; call print char
+	b0 0a		; al = 0xa
+	9a 00 01 00 01	; call print char
+
+	cb		; return
+
+0x480	; register string
+
+	"AX   CX   DX   BX" 0d 0a 
+	"SP   BP   SI   DI" 0d 0a
+	0d 0a 00
 
 0xd00	; end
