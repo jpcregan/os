@@ -223,6 +223,13 @@
 	b0 0a		; al = 0xa
 	9a 00 01 00 01	; call print char
 
+	; newline
+
+	b0 0d		; al = 0xd
+	9a 00 01 00 01	; call print char
+	b0 0a		; al = 0xa
+	9a 00 01 00 01	; call print char
+
 	cb		; return
 
 0x480	; register string
