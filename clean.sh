@@ -1,5 +1,7 @@
 #!/bin/sh
 
-rm -f *.bin
+rm -f boot.bin
+rm -f kernel.bin
+rm -f shell.bin
 
 rm -f os.img
